@@ -14,3 +14,12 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);
 });
+
+// error handler middleware
+app.use(function (err, req, res, next) {
+    res.status(500).send({
+        status: 500,
+        message: err.message,
+        body: {}
+    });
+});
