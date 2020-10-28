@@ -1,9 +1,13 @@
 const express = require('express');
 const dotEnv = require('dotenv');
+const cors = require('cors');
 
 dotEnv.config();
 
 const app = express();
+
+// cors - access api from different domains
+app.use(cors());
 
 // request payload middleware
 app.use(express.json());
