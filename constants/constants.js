@@ -4,6 +4,9 @@ module.exports = {
         message: '',
         body: {}
     },
+    bcrypt: {
+        DEFAULT_RECOMMENDED_SALT_ROUND: 12
+    },
     productMessage: {
         PRODUCT_CREATED: 'Product created successfully',
         PRODUCT_FETCHED: 'Product fetched successfully',
