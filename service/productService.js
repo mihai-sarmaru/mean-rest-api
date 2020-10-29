@@ -59,3 +59,19 @@ module.exports.updateProduct = async ({id, updateInfo}) => { // <-- destructured
         throw new Error(error);
     }
 }
+
+module.exports.deleteProduct = async ({id}) => { // <-- destructured params
+    try {
+        // check if object id is valid
+        checkObjectId(id);
+
+        let product = await Product.findByIdAndDelete(id);
+        if (!product) {
+            throw new Error(constants.productMessage.PRODUCT_NOT_FOUND);
+        }
+        return formatMongoData(product);
+    } catch (error) {
+        console.log('Something went wrong: Service: deleteProduct', error);
+        throw new Error(error);
+    }
+}
