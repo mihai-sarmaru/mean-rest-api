@@ -12,7 +12,6 @@ router.get('/',
     joiSchemaValidation.validateQueryParams(productSchema.getAllProductsSchema),
     productController.getAllProducts);
 
-router.get('/:id',
-    productController.getProductById);
+router.get('/:id', productController.getProductById);
 
 module.exports = router;
