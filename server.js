@@ -19,6 +19,7 @@ app.use(express.urlencoded({extended: true}));
 
 // routers
 app.use('/api/v1/product', require('./routes/productRoutes'));
+app.use('/api/v1/user', require('./routes/userRoutes'));
 
 app.get('/', (req, res, next) => {
     res.send('Hello from Node Server.');

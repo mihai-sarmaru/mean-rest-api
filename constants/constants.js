@@ -11,6 +11,9 @@ module.exports = {
         PRODUCT_UPDATED: 'Product updated successfully',
         PRODUCT_DELETED: 'Product deleted successfully'
     },
+    userMessage: {
+        SIGNUP_SUCCESS: 'Signed up successfully'
+    },
     validationMessage: {
         BAD_REQUEST: 'Invalid Fields'
     },
