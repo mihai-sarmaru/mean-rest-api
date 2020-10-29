@@ -17,3 +17,37 @@ module.exports.createProduct = async (req, res) => {
     // return response
     return res.status(response.status).send(response);
 }
+
+module.exports.getAllProducts = async (req, res) => {
+    let response = { ...constants.defaultServerResponse };
+    try {
+        console.log('Request OBJ: ', req.query);
+        const serviceResponse = await productService.getAllProducts(req.query);
+
+        response.status = 200;
+        response.message = constants.productMessage.PRODUCT_FETCHED;
+        response.body = serviceResponse;
+    } catch (error) {
+        console.log('Something went wrong: Controller: getAllProducts', error);
+        response.message = error.message;
+    }
+    // return response
+    return res.status(response.status).send(response);
+}
+
+module.exports.getProductById = async (req, res) => {
+    let response = { ...constants.defaultServerResponse };
+    try {
+        console.log('Request OBJ: ', req.query);
+        const serviceResponse = await productService.getProductById(req.params);
+
+        response.status = 200;
+        response.message = constants.productMessage.PRODUCT_FETCHED;
+        response.body = serviceResponse;
+    } catch (error) {
+        console.log('Something went wrong: Controller: getProductById', error);
+        response.message = error.message;
+    }
+    // return response
+    return res.status(response.status).send(response);
+}
