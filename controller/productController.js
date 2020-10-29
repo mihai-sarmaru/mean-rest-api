@@ -22,7 +22,7 @@ module.exports.getAllProducts = async (req, res) => {
     let response = { ...constants.defaultServerResponse };
     try {
         console.log('Request OBJ: ', req.body);
-        const serviceResponse = await productService.getAllProducts();
+        const serviceResponse = await productService.getAllProducts(req.query);
 
         response.status = 200;
         response.message = constants.productMessage.PRODUCT_FETCHED;

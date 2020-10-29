@@ -8,6 +8,8 @@ router.post('/',
     joiSchemaValidation.validateBody(productSchema.createProductSchema),
     productController.createProduct);
 
-router.get('/', productController.getAllProducts);
+router.get('/',
+    joiSchemaValidation.validateQueryParams(productSchema.getAllProductsSchema),
+    productController.getAllProducts);
 
 module.exports = router;
