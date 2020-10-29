@@ -51,3 +51,23 @@ module.exports.getProductById = async (req, res) => {
     // return response
     return res.status(response.status).send(response);
 }
+
+module.exports.updateProduct = async (req, res) => {
+    let response = { ...constants.defaultServerResponse };
+    try {
+        console.log('Request OBJ: ', req.query);
+        const serviceResponse = await productService.updateProduct({
+            id: req.params.id,
+            updateInfo: req.body
+        });
+
+        response.status = 200;
+        response.message = constants.productMessage.PRODUCT_UPDATED;
+        response.body = serviceResponse;
+    } catch (error) {
+        console.log('Something went wrong: Controller: updateProduct', error);
+        response.message = error.message;
+    }
+    // return response
+    return res.status(response.status).send(response);
+}
