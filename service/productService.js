@@ -39,3 +39,39 @@ module.exports.getProductById = async ({id}) => { // <-- destructured params
         throw new Error(error);
     }
 }
+
+module.exports.updateProduct = async ({id, updateInfo}) => { // <-- destructured params
+    try {
+        // check if object id is valid
+        checkObjectId(id);
+
+        let product = await Product.findOneAndUpdate(
+            {_id: id},
+            updateInfo,
+            {new: true} // <-- return updated document
+        );
+        if (!product) {
+            throw new Error(constants.productMessage.PRODUCT_NOT_FOUND);
+        }
+        return formatMongoData(product);
+    } catch (error) {
+        console.log('Something went wrong: Service: updateProduct', error);
+        throw new Error(error);
+    }
+}
+
+module.exports.deleteProduct = async ({id}) => { // <-- destructured params
+    try {
+        // check if object id is valid
+        checkObjectId(id);
+
+        let product = await Product.findByIdAndDelete(id);
+        if (!product) {
+            throw new Error(constants.productMessage.PRODUCT_NOT_FOUND);
+        }
+        return formatMongoData(product);
+    } catch (error) {
+        console.log('Something went wrong: Service: deleteProduct', error);
+        throw new Error(error);
+    }
+}
