@@ -11,3 +11,14 @@ module.exports.createProduct = async (productData) => {
         throw new Error(error);
     }
 }
+
+module.exports.getAllProducts = async () => {
+    try {
+        let products = await Product.find({});
+        return products;
+        // return result.toObject();
+    } catch (error) {
+        console.log('Something went wrong: Service: getAllProducts', error);
+        throw new Error(error);
+    }
+}
