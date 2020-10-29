@@ -1,5 +1,6 @@
 const Product = require('../model/product');
-const {formatMongoData} = require('../utils/dbHelper')
+const {formatMongoData, checkObjectId} = require('../utils/dbHelper')
+const constants = require('../constants/constants');
 
 module.exports.createProduct = async (productData) => {
     try {
@@ -19,6 +20,22 @@ module.exports.getAllProducts = async ({skip = 0, limit = 10}) => { // <-- destr
         return formatMongoData(products);
     } catch (error) {
         console.log('Something went wrong: Service: getAllProducts', error);
+        throw new Error(error);
+    }
+}
+
+module.exports.getProductById = async ({id}) => { // <-- destructured params
+    try {
+        // check if object id is valid
+        checkObjectId(id);
+
+        let product = await Product.findById(id);
+        if (!product) {
+            throw new Error(constants.productMessage.PRODUCT_NOT_FOUND);
+        }
+        return formatMongoData(product);
+    } catch (error) {
+        console.log('Something went wrong: Service: getProductById', error);
         throw new Error(error);
     }
 }
