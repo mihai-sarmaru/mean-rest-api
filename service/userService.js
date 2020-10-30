@@ -2,6 +2,7 @@ const User = require('../model/user');
 const {formatMongoData} = require('../utils/dbHelper')
 const constants = require('../constants/constants');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports.signup = async ({email, password}) => { //<-- destructure
     try{
@@ -38,6 +39,10 @@ module.exports.login = async ({email, password}) => { //<-- destructure
         if (!isPasswordValid) {
             throw new Error(constants.userMessage.INVALID_PASSWORD);
         }
+
+        // create and return jsonwebtoken
+        const token = jwt.sign({id: user._id}, process.env.SECRET_KEY || 'my-secret-jwt-key', {expiresIn: '1d'});
+        return {token: token};
 
     } catch (error) {
         console.log('Something went wrong: Service: updateProduct', error);
