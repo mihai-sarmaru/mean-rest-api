@@ -8,4 +8,8 @@ router.post('/signup',
     joiSchemaValidation.validateBody(userSchema.signupSchema),
     userController.signup);
 
+router.post('/login',
+    joiSchemaValidation.validateBody(userSchema.loginSchema),
+    userController.login);
+
 module.exports = router;

@@ -16,7 +16,10 @@ module.exports = {
     },
     userMessage: {
         SIGNUP_SUCCESS: 'Signed up successfully',
-        USER_EXISTS: 'Signup email already exists'
+        LOGIN_SUCCESS: 'Logged in successfully',
+        USER_EXISTS: 'Signup email already exists',
+        USER_NOT_FOUND: 'User not found',
+        INVALID_PASSWORD: 'Incorrect password'
     },
     validationMessage: {
         BAD_REQUEST: 'Invalid Fields'

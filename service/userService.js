@@ -24,3 +24,24 @@ module.exports.signup = async ({email, password}) => { //<-- destructure
     }
 
 }
+
+module.exports.login = async ({email, password}) => { //<-- destructure
+    try{
+        // check if user exists
+        const user = await User.findOne({email: email});
+        if (!user) {
+            throw new Error(constants.userMessage.USER_NOT_FOUND);
+        }
+
+        // check if password is valid
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error(constants.userMessage.INVALID_PASSWORD);
+        }
+
+    } catch (error) {
+        console.log('Something went wrong: Service: updateProduct', error);
+        throw new Error(error);
+    }
+
+}
